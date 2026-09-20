@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "play-console": {
+      "command": "python",
+      "args": [
+        "mcp/server.py"
+      ],
+      "disabled": false
+    }
+  }
+}

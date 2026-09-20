@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# OpenSSF Least Privilege Invariant
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate Python & Security Posture
+    runs-on: ubuntu-latest
+    steps:
+      # Pinned to immutable commit SHA (actions/checkout@v7.0.1)
+      - name: Checkout Code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@0a5c61591373683505ea898e09a6ea86ab843863 # v5.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Validate Python Syntax
+        run: |
+          python -m py_compile mcp/*.py
+          echo "✔ Python source compiled cleanly."
+
+      - name: Validate JSON Manifests
+        run: |
+          python -c "
+          import json, glob
+          for f in glob.glob('**/*.json', recursive=True):
+              with open(f, 'r') as fp:
+                  json.load(fp)
+              print(f'✔ JSON OK: {f}')
+          "
+
+      - name: Check Secret Quarantine & Path Portability
+        run: |
+          python -c "
+          import subprocess, sys
+          files = subprocess.check_output(['git', 'ls-files'], text=True).splitlines()
+          bad_files = []
+          for f in files:
+              if any(f.endswith(ext) for ext in ['.png', '.jpg', '.ico']):
+                  continue
+              with open(f, 'r', encoding='utf-8', errors='ignore') as fp:
+                  content = fp.read()
+              if 'C:\\\\Users\\\\' in content or 'C:/Users/' in content:
+                  bad_files.append((f, 'Hardcoded user path detected'))
+              if '-----BEGIN PRIVATE KEY-----' in content:
+                  bad_files.append((f, 'Sensitive private key header pattern detected'))
+          if bad_files:
+              print('Security/Portability violations found:', bad_files)
+              sys.exit(1)
+          print('✔ Zero hardcoded local paths and zero private key patterns detected.')
+          "

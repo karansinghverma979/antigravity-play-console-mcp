@@ -1,0 +1,29 @@
+name: 🐛 Bug Report
+description: File a bug report for play-console
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to report an issue with the Play Console Sentinel!
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what went wrong.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Tool & Reproduction Steps
+      description: Which MCP tool was called (`play_upload_bundle`, `play_create_release`, etc.) and the exact error output.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Python version, OS, client (Antigravity CLI / Cursor / Claude Desktop).
+      placeholder: Python 3.12 / Windows 11 / Antigravity CLI
+    validations:
+      required: false

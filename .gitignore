@@ -33,9 +33,12 @@ venv/
 ENV/
 
 # Sensitive GCP & Android credentials (CRITICAL)
-*.json
-!credentials.example.json
+*service_account*.json
 !service_account.example.json
+*credentials*.json
+!credentials.example.json
+token.json
+tokens.json
 *.jks
 *.keystore
 *.p8
@@ -43,6 +46,7 @@ ENV/
 *.key
 *.pem
 key.properties
+.local/
 
 # Android Build artifacts
 *.apk

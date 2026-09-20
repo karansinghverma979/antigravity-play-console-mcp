@@ -37,4 +37,4 @@ Homepage = "https://github.com/karansinghverma979/antigravity-play-console-mcp"
 Repository = "https://github.com/karansinghverma979/antigravity-play-console-mcp"
 
 [project.scripts]
-antigravity-play-console-mcp = "src.server:main"
+antigravity-play-console-mcp = "mcp.server:main"

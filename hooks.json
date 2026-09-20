@@ -1,0 +1,17 @@
+{
+  "play-console-guard": {
+    "enabled": false,
+    "PreToolUse": [
+      {
+        "matcher": "call_mcp_tool",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pwsh -NoProfile -Command \"if ($env:COMMAND_LINE -match 'play_create_release.*production') { Write-Host '[Play Console Guard] Production release detected. Staged rollout verification required.' }\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

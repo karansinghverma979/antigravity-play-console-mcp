@@ -1,0 +1,18 @@
+name: 💡 Feature Request
+description: Propose a new Google Play API capability or workflow improvement
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: feature
+    attributes:
+      label: Proposed Capability
+      description: What new Google Play Developer API feature or publishing workflow would you like to add?
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Rationale
+      description: Why is this feature valuable for Android developer workflows?
+    validations:
+      required: true

@@ -25,27 +25,27 @@ class PlayConsoleClient:
 
     @staticmethod
     def _resolve_key_path(custom_path: Optional[str] = None) -> str:
-        """Resolve service account JSON key path with fallback search paths."""
+        """Resolve service account JSON key path strictly from sovereign external quarantine locations."""
         candidates = []
         if custom_path:
             candidates.append(Path(custom_path).expanduser())
-        if os.getenv("GOOGLE_APPLICATION_CREDENTIALS"):
-            candidates.append(Path(os.getenv("GOOGLE_APPLICATION_CREDENTIALS")).expanduser())
         if os.getenv("PLAY_CONSOLE_KEY_PATH"):
             candidates.append(Path(os.getenv("PLAY_CONSOLE_KEY_PATH")).expanduser())
+        if os.getenv("GOOGLE_APPLICATION_CREDENTIALS"):
+            candidates.append(Path(os.getenv("GOOGLE_APPLICATION_CREDENTIALS")).expanduser())
         
-        # System defaults
+        # Sovereign External Quarantine locations (strictly outside git repository tree)
         candidates.append(Path.home() / ".gemini" / "keys" / "google-play-service-account.json")
-        candidates.append(Path(__file__).parent.parent / "service_account.json")
-        candidates.append(Path.cwd() / "service_account.json")
+        candidates.append(Path.home() / ".gemini" / "config" / "play_console" / "service_account.json")
+        candidates.append(Path.home() / ".config" / "play_console" / "service_account.json")
 
         for p in candidates:
             if p.is_file():
                 return str(p.resolve())
 
         raise FileNotFoundError(
-            "Google Play Service Account JSON key not found! Please set GOOGLE_APPLICATION_CREDENTIALS, "
-            "PLAY_CONSOLE_KEY_PATH, or place key at ~/.gemini/keys/google-play-service-account.json"
+            "Google Play Service Account JSON key not found! Please place key in external quarantine at "
+            "~/.gemini/keys/google-play-service-account.json or set PLAY_CONSOLE_KEY_PATH."
         )
 
     # =========================================================================

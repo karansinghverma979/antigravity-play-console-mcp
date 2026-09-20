@@ -1,0 +1,23 @@
+{
+  "name": "play-console-plugin",
+  "description": "Autonomous Google Play Console Release Sentinel, Store Listing Governor & Android Publisher",
+  "version": "1.0.0",
+  "author": "Karan Singh Verma",
+  "license": "MIT",
+  "homepage": "https://github.com/karansinghverma979/antigravity-play-console-mcp",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/karansinghverma979/antigravity-play-console-mcp.git"
+  },
+  "keywords": [
+    "antigravity",
+    "google-play",
+    "play-console",
+    "android",
+    "mcp",
+    "release-sentinel",
+    "bundle-uploader",
+    "store-listings",
+    "app-publisher"
+  ]
+}
