@@ -28,7 +28,7 @@ The authoritative management skill and runbook for automating the Google Play De
 ```
 
 1. **🔑 Sovereign External Quarantine**:
-   - Google Play service account keys must reside outside the repository tree in `%USERPROFILE%\.gemini\keys\google-play-service-account.json` or `PLAY_CONSOLE_KEY_PATH`.
+   - Google Play service account keys must reside outside the repository tree in `%USERPROFILE%\.gemini\credentials\play-console\service_account.json` or `PLAY_CONSOLE_KEY_PATH` (legacy `~/.gemini/keys/` supported as fallback).
    - Never stage, commit, or print credentials.
 2. **🛡️ Production Release Guard**:
    - Always upload and verify builds on the `internal` test track first.

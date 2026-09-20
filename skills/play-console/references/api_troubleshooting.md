@@ -7,7 +7,7 @@
 - **Resolution**:
   1. Verify the service account is added to Google Play Console under **Users and permissions**.
   2. Grant the service account permissions: **Release apps to testing tracks**, **Manage store presence**, and **Manage production releases**.
-  3. Verify the key exists in `%USERPROFILE%\.gemini\keys\google-play-service-account.json`.
+  3. Verify the key exists in `%USERPROFILE%\.gemini\credentials\play-console\service_account.json` (or legacy `~/.gemini/keys/`).
 
 ### `400 Invalid Version Code`
 - **Cause**: The uploaded `.aab` has a `versionCode` less than or equal to an existing release.

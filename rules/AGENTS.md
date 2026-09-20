@@ -6,10 +6,10 @@ Whenever invoking Google Play Console tools or managing Android application life
 
 ### 1. 🔑 Sovereign External Credential Quarantine (Rule Zero)
 * **MANDATORY**: Google Play service account keys (`*.json`) must **NEVER** be committed, created, or staged inside the git repository tree.
-* Keys must reside strictly in the sovereign external quarantine location:
-  - `%USERPROFILE%\.gemini\keys\google-play-service-account.json` (Windows)
-  - `~/.gemini/keys/google-play-service-account.json` (Linux / macOS)
-  - Or specified via `PLAY_CONSOLE_KEY_PATH` environment variable.
+* Keys must reside strictly in the sovereign external quarantine vault:
+  - `%USERPROFILE%\.gemini\credentials\play-console\service_account.json` (Windows)
+  - `~/.gemini/credentials/play-console/service_account.json` (Linux / macOS)
+  - Or specified via `PLAY_CONSOLE_KEY_PATH` environment variable (legacy `~/.gemini/keys/` supported as fallback).
 * Never print or log private key strings, client emails, or key IDs into chat context or public logs.
 
 ---

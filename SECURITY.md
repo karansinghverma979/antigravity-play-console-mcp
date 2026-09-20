@@ -9,7 +9,7 @@ Only the latest release receives active security patches.
 
 ## Security Invariants
 `play-console-plugin` enforces strict operational security boundaries:
-1. **Sovereign External Credential Quarantine**: Google Play service account keys (`*.json`) must strictly reside outside the git working tree in `%USERPROFILE%\.gemini\keys\google-play-service-account.json` or via `PLAY_CONSOLE_KEY_PATH`.
+1. **Sovereign External Credential Quarantine**: Google Play service account keys (`*.json`) must strictly reside outside the git working tree in the centralized vault at `%USERPROFILE%\.gemini\credentials\play-console\service_account.json` (or via `PLAY_CONSOLE_KEY_PATH`, with fallback to legacy `~/.gemini/keys/`).
 2. **Path Portability**: Absolute machine paths (e.g. `C:\Users\<user>`) are forbidden in git-tracked code and documentation.
 3. **Production Safety Barrier**: Direct unconfirmed releases to Google Play production tracks are blocked by operational policy.
 

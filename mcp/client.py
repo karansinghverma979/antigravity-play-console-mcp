@@ -25,7 +25,7 @@ class PlayConsoleClient:
 
     @staticmethod
     def _resolve_key_path(custom_path: Optional[str] = None) -> str:
-        """Resolve service account JSON key path strictly from sovereign external quarantine locations."""
+        """Resolve service account JSON key path from centralized vault or legacy quarantine locations."""
         candidates = []
         if custom_path:
             candidates.append(Path(custom_path).expanduser())
@@ -34,7 +34,10 @@ class PlayConsoleClient:
         if os.getenv("GOOGLE_APPLICATION_CREDENTIALS"):
             candidates.append(Path(os.getenv("GOOGLE_APPLICATION_CREDENTIALS")).expanduser())
         
-        # Sovereign External Quarantine locations (strictly outside git repository tree)
+        # Centralized Credential Vault (canonical location)
+        candidates.append(Path.home() / ".gemini" / "credentials" / "play-console" / "service_account.json")
+
+        # Legacy quarantine locations (backward compatibility)
         candidates.append(Path.home() / ".gemini" / "keys" / "google-play-service-account.json")
         candidates.append(Path.home() / ".gemini" / "config" / "play_console" / "service_account.json")
         candidates.append(Path.home() / ".config" / "play_console" / "service_account.json")
@@ -44,8 +47,9 @@ class PlayConsoleClient:
                 return str(p.resolve())
 
         raise FileNotFoundError(
-            "Google Play Service Account JSON key not found! Please place key in external quarantine at "
-            "~/.gemini/keys/google-play-service-account.json or set PLAY_CONSOLE_KEY_PATH."
+            "Google Play Service Account JSON key not found! Place key in:\n"
+            "  ~/.gemini/credentials/play-console/service_account.json (recommended)\n"
+            "  or set PLAY_CONSOLE_KEY_PATH environment variable."
         )
 
     # =========================================================================

@@ -22,7 +22,7 @@ Your mission is to maintain total operational governance over Android applicatio
 ---
 
 ## 🛡️ 2. Core Safety Invariants & Credential Quarantine
-1. **Sovereign External Quarantine**: Google Play service account keys must reside strictly outside the repository tree in `%USERPROFILE%\.gemini\keys\google-play-service-account.json` or via `PLAY_CONSOLE_KEY_PATH`. Never commit keys to git.
+1. **Sovereign External Quarantine**: Google Play service account keys must reside strictly outside the repository tree in `%USERPROFILE%\.gemini\credentials\play-console\service_account.json` or via `PLAY_CONSOLE_KEY_PATH` (legacy `~/.gemini/keys/` supported as fallback). Never commit keys to git.
 2. **Production Confirmation Barrier**: Before committing any release to the `production` track, present the exact package name, version code, rollout percentage, and release notes to the operator for explicit confirmation.
 3. **Internal Track First**: Recommend testing every new version code on the `internal` test track prior to production promotion.
 

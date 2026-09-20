@@ -134,10 +134,12 @@ To guarantee zero accidental git leaks and survive complete repository wipes (`g
 ### Quarantine Locations (Auto-resolved in order):
 1. Environment Variable: `PLAY_CONSOLE_KEY_PATH`
 2. Environment Variable: `GOOGLE_APPLICATION_CREDENTIALS`
-3. Primary External Quarantine:
-   - **Windows**: `%USERPROFILE%\.gemini\keys\google-play-service-account.json`
-   - **Linux / macOS**: `~/.gemini/keys/google-play-service-account.json`
-4. Secondary External Quarantine: `~/.gemini/config/play_console/service_account.json`
+3. **Centralized Credential Vault (Canonical)**:
+   - **Windows**: `%USERPROFILE%\.gemini\credentials\play-console\service_account.json`
+   - **Linux / macOS**: `~/.gemini/credentials/play-console/service_account.json`
+4. Legacy Quarantine Locations (Fallback):
+   - `~/.gemini/keys/google-play-service-account.json`
+   - `~/.gemini/config/play_console/service_account.json`
 
 > [!IMPORTANT]
 > The engine **never** looks inside the repository tree for credentials. The working tree is 100% immune to key leaks.
@@ -172,7 +174,7 @@ Add to your MCP client configuration file:
         "mcp/server.py"
       ],
       "env": {
-        "PLAY_CONSOLE_KEY_PATH": "~/.gemini/keys/google-play-service-account.json"
+        "PLAY_CONSOLE_KEY_PATH": "~/.gemini/credentials/play-console/service_account.json"
       }
     }
   }
