@@ -12,7 +12,7 @@ import os
 import traceback
 from typing import Any, Dict, Optional
 
-# Ensure src module can be resolved regardless of execution path
+# Ensure mcp module can be resolved regardless of execution path
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 PARENT_DIR = os.path.dirname(CURRENT_DIR)
 if CURRENT_DIR not in sys.path:
@@ -121,7 +121,7 @@ def handle_play_check_status(args: Dict[str, Any]) -> Dict[str, Any]:
     return {
         "status": "online",
         "service_account": client.credentials.service_account_email,
-        "key_path": client.key_path,
+        "key_loaded": True,
         "api_endpoint": "https://androidpublisher.googleapis.com/androidpublisher/v3/"
     }
 
@@ -338,7 +338,7 @@ def handle_jsonrpc(raw_line: str) -> None:
                 }
             })
         except Exception as err:
-            err_details = traceback.format_exc()
+            sys.stderr.write(traceback.format_exc())
             send_json({
                 "jsonrpc": "2.0",
                 "id": req_id,
@@ -346,7 +346,7 @@ def handle_jsonrpc(raw_line: str) -> None:
                     "content": [
                         {
                             "type": "text",
-                            "text": f"Error in '{tool_name}': {str(err)}\n\n{err_details}"
+                            "text": f"Error in '{tool_name}': {str(err)}"
                         }
                     ],
                     "isError": True

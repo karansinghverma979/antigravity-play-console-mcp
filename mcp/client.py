@@ -133,6 +133,7 @@ class PlayConsoleClient:
                 body=body
             ).execute()
 
+            self.validate_edit(package_name, edit_id)
             self.commit_edit(package_name, edit_id)
             return {"status": "success", "listing": updated}
         except Exception:

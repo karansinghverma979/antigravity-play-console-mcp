@@ -62,7 +62,7 @@ Creates or updates a release on a track (`internal`, `alpha`, `beta`, `productio
   - `version_code`: Integer version code returned from upload.
   - `status`: `"completed"`, `"draft"`, or `"inProgress"`.
   - `user_fraction`: Float between `0.0` and `1.0` (required for `inProgress` staged rollout, e.g. `0.1` for 10%).
-  - `release_notes`: Array of localized release notes (e.g. `[{"language": "en-US", "text": "Bug fixes and performance improvements."}]`).
+  - `release_notes`: Object mapping language codes to notes text (e.g. `{"en-US": "Bug fixes and performance improvements."}`).
 
 ### 4. 📝 Store Listing Metadata & Localization
 Updates localized store metadata adhering to Google Play character limits:

@@ -1,6 +1,6 @@
 {
   "play-console-guard": {
-    "enabled": false,
+    "enabled": true,
     "PreToolUse": [
       {
         "matcher": "call_mcp_tool",
