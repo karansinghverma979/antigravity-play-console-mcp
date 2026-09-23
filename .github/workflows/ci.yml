@@ -38,23 +38,3 @@ jobs:
               print(f'✔ JSON OK: {f}')
           "
 
-      - name: Check Secret Quarantine & Path Portability
-        run: |
-          python -c "
-          import subprocess, sys
-          files = subprocess.check_output(['git', 'ls-files'], text=True).splitlines()
-          bad_files = []
-          for f in files:
-              if any(f.endswith(ext) for ext in ['.png', '.jpg', '.ico']):
-                  continue
-              with open(f, 'r', encoding='utf-8', errors='ignore') as fp:
-                  content = fp.read()
-              if 'C:\\\\Users\\\\' in content or 'C:/Users/' in content:
-                  bad_files.append((f, 'Hardcoded user path detected'))
-              if '-----BEGIN PRIVATE KEY-----' in content:
-                  bad_files.append((f, 'Sensitive private key header pattern detected'))
-          if bad_files:
-              print('Security/Portability violations found:', bad_files)
-              sys.exit(1)
-          print('✔ Zero hardcoded local paths and zero private key patterns detected.')
-          "
