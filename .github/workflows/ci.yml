@@ -15,12 +15,11 @@ jobs:
     name: Validate Python & Security Posture
     runs-on: ubuntu-latest
     steps:
-      # Pinned to immutable commit SHA (actions/checkout@v7.0.1)
       - name: Checkout Code
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@0a5c61591373683505ea898e09a6ea86ab843863 # v5.0.0
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 

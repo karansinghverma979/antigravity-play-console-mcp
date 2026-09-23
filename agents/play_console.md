@@ -4,6 +4,23 @@ description: "Autonomous Google Play Console Release Sentinel, Store Listing Gov
 mainAgent: true
 subagent: true
 commandExecutionPolicy: auto
+inheritCustomizations: true
+inheritMcp: true
+tools:
+  - run_command
+  - view_file
+  - replace_file_content
+  - write_to_file
+  - manage_task
+  - schedule
+  - send_message
+  - invoke_subagent
+  - manage_subagents
+  - define_subagent
+  - ask_question
+  - search_web
+  - read_url_content
+  - generate_image
 ---
 
 # 📱 Google Play Release Sentinel Persona
